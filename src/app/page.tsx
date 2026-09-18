@@ -1,38 +1,20 @@
-import Link from 'next/link';
+import { postsQuery } from '@/features/posts/queries/post-queries';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 
-export default function HomePage() {
+import PostsPreview from './posts-preview';
+
+export default async function HomePage() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(postsQuery());
+
   return (
-    <main className="flex min-h-screen items-center justify-center px-6">
-      <div className="w-full max-w-2xl space-y-6 text-center">
-        <div className="space-y-3">
-          <p className="text-sm font-medium text-gray-500">ContentHub</p>
-
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            Explore content with a modern frontend architecture.
-          </h1>
-
-          <p className="text-lg text-gray-600">
-            A demonstration of Next.js App Router, TypeScript, TanStack Query,
-            Redux Toolkit, and production-quality frontend architecture.
-          </p>
-        </div>
-
-        <div className="flex justify-center gap-3">
-          <Link
-            href="/posts"
-            className="rounded-lg bg-black px-5 py-3 text-sm font-medium text-white transition hover:bg-gray-800"
-          >
-            Explore posts
-          </Link>
-
-          <Link
-            href="/login"
-            className="rounded-lg border px-5 py-3 text-sm font-medium transition hover:bg-gray-50"
-          >
-            Sign in
-          </Link>
-        </div>
-      </div>
-    </main>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <PostsPreview />
+    </HydrationBoundary>
   );
 }
