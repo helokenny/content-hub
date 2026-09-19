@@ -1,4 +1,20 @@
+import { Suspense } from 'react';
+
 import { LoginForm } from '@/features/auth/components/login-form';
+
+function LoginFormFallback() {
+  return (
+    <div className="space-y-5">
+      <div className="space-y-2">
+        <div className="h-4 w-24 animate-pulse rounded bg-gray-200" />
+
+        <div className="h-12 w-full animate-pulse rounded-lg bg-gray-100" />
+      </div>
+
+      <div className="h-12 w-full animate-pulse rounded-lg bg-gray-200" />
+    </div>
+  );
+}
 
 export default function LoginPage() {
   return (
@@ -15,7 +31,9 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <LoginForm />
+          <Suspense fallback={<LoginFormFallback />}>
+            <LoginForm />
+          </Suspense>
         </div>
       </div>
     </main>

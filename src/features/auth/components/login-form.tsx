@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { setAuthenticatedUser } from '@/features/auth/store/auth-slice';
 import { useAppDispatch } from '@/store/hooks';
@@ -9,6 +9,7 @@ import { AUTH_COOKIE_NAME, AUTH_COOKIE_VALUE } from '@/constants';
 
 export function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
 
   const [email, setEmail] = useState('');
@@ -23,17 +24,26 @@ export function LoginForm() {
 
     setIsSubmitting(true);
 
+    // this will normally ome from backend API, say upon refresh
     const user = {
       id: 1,
       name: 'ContentHub User',
-      email: email.trim(),
+      email: 'user@contenthub.local',
     };
 
     document.cookie = `${AUTH_COOKIE_NAME}=${AUTH_COOKIE_VALUE}; path=/; max-age=86400; SameSite=Lax`;
 
     dispatch(setAuthenticatedUser(user));
 
-    router.push('/dashboard');
+    const redirectPath = searchParams.get('redirect');
+
+    // redirect destinations should be constrained to app routes
+    const safeRedirect =
+      redirectPath?.startsWith('/') && !redirectPath.startsWith('//')
+        ? redirectPath
+        : '/dashboard';
+
+    router.push(safeRedirect);
   }
 
   return (

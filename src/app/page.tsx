@@ -1,5 +1,4 @@
-import { ROUTES_LIST } from '@/constants';
-import Link from 'next/link';
+import Launch from '@/features/home/components/launch';
 
 export default function HomePage() {
   return (
@@ -18,21 +17,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="flex gap-3">
-          <Link
-            href={ROUTES_LIST.posts}
-            className="rounded-lg bg-gray-900 px-5 py-3 text-sm font-medium text-white hover:bg-gray-800"
-          >
-            Browse posts
-          </Link>
-
-          <Link
-            href={ROUTES_LIST.login}
-            className="rounded-lg border px-5 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50"
-          >
-            Sign in
-          </Link>
-        </div>
+        <Launch />
       </div>
     </main>
   );

@@ -6,6 +6,7 @@ import { clearAuthentication } from '@/features/auth/store/auth-slice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 import Link from 'next/link';
+import { AUTH_COOKIE_NAME } from '@/constants';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -13,8 +14,12 @@ export default function DashboardPage() {
 
   const user = useAppSelector((state) => state.auth.user);
 
+  if (!user) {
+    return <div>Please wait...</div>;
+  }
+
   function handleLogout() {
-    document.cookie = 'contenthub-auth=; path=/; max-age=0; SameSite=Lax';
+    document.cookie = `${AUTH_COOKIE_NAME}=; path=/; max-age=0; SameSite=Lax`;
 
     dispatch(clearAuthentication());
 
