@@ -1,7 +1,5 @@
 import { queryOptions } from '@tanstack/react-query';
-
 import { postService } from '../services/post.service';
-
 import { postKeys } from './post-keys';
 
 export const postsQuery = () =>

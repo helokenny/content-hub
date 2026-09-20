@@ -5,24 +5,33 @@ interface ErrorPageProps {
   reset: () => void;
 }
 
-// {error} will not be used because this is user-facing error handling,
-// we don't want to display the raw error into the UI.
 export default function ErrorPage({ error: _error, reset }: ErrorPageProps) {
   return (
-    <main className="mx-auto max-w-2xl px-6 py-20 text-center">
-      <h1 className="text-3xl font-bold text-gray-900">Something went wrong</h1>
+    <main className="flex min-h-[60vh] items-center justify-center px-6 py-12">
+      <div className="w-full max-w-md rounded-2xl border bg-white p-8 text-center shadow-sm">
+        <div className="space-y-4">
+          <p className="text-sm font-medium text-red-600">
+            Something went wrong
+          </p>
 
-      <p className="mt-3 text-gray-600">
-        We couldn&apos;t load this page. Please try again.
-      </p>
+          <h1 className="text-2xl font-bold text-gray-900">
+            We couldn&apos;t load this page
+          </h1>
 
-      <button
-        type="button"
-        onClick={reset}
-        className="mt-6 rounded-lg bg-gray-900 px-5 py-3 text-sm font-medium text-white hover:bg-gray-800"
-      >
-        Try again
-      </button>
+          <p className="text-sm leading-6 text-gray-600">
+            An unexpected error occurred. You can try again without leaving the
+            page.
+          </p>
+
+          <button
+            type="button"
+            onClick={reset}
+            className="rounded-lg bg-gray-900 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800"
+          >
+            Try again
+          </button>
+        </div>
+      </div>
     </main>
   );
 }
