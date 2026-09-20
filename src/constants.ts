@@ -1,7 +1,8 @@
 export const ROUTES_LIST = {
+  home: '/',
+  dashboard: '/dashboard',
   posts: '/posts',
   login: '/login',
-  dashboard: '/dashboard',
 };
 
 export const AUTH_COOKIE_NAME = 'contenthub-auth';

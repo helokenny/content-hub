@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers';
 
-import { AUTH_COOKIE_NAME, AUTH_COOKIE_VALUE } from '@/constants';
 import { AuthBootstrap } from '@/features/auth/components/auth-bootstrap';
-import Link from 'next/link';
+import { AppShell } from '@/components/layout/app-shell';
+import { AUTH_COOKIE_NAME, AUTH_COOKIE_VALUE } from '@/constants';
 
 export default async function ProtectedLayout({
   children,
@@ -27,12 +27,7 @@ export default async function ProtectedLayout({
 
   return (
     <AuthBootstrap user={user}>
-      <nav className="color-blue flex gap-8 p-5">
-        <Link href="/">Home</Link>
-        <Link href="/dashboard">Dashboard</Link>
-        <Link href="/posts">Posts</Link>
-      </nav>
-      {children}
+      <AppShell>{children}</AppShell>
     </AuthBootstrap>
   );
 }

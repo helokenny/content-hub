@@ -6,7 +6,7 @@ import { clearAuthentication } from '@/features/auth/store/auth-slice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 import Link from 'next/link';
-import { AUTH_COOKIE_NAME } from '@/constants';
+import { AUTH_COOKIE_NAME, ROUTES_LIST } from '@/constants';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function DashboardPage() {
 
     dispatch(clearAuthentication());
 
-    router.push('/login');
+    router.push(ROUTES_LIST.login);
   }
 
   return (
@@ -52,7 +52,7 @@ export default function DashboardPage() {
 
       <section className="grid gap-5 sm:grid-cols-2">
         <Link
-          href="/posts"
+          href={ROUTES_LIST.posts}
           className="rounded-xl border bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
         >
           <h2 className="font-semibold text-gray-900">Browse posts</h2>

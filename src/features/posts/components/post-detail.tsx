@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { ROUTES_LIST } from '@/constants';
 import type { Post } from '@/features/posts/types/post';
 
 import { CommentList } from './comment-list';
@@ -13,7 +14,7 @@ export function PostDetail({ post }: PostDetailProps) {
   return (
     <div className="space-y-10">
       <Link
-        href="/posts"
+        href={ROUTES_LIST.posts}
         className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700"
       >
         ← Back to posts

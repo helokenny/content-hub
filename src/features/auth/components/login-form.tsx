@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import { setAuthenticatedUser } from '@/features/auth/store/auth-slice';
 import { useAppDispatch } from '@/store/hooks';
-import { AUTH_COOKIE_NAME, AUTH_COOKIE_VALUE } from '@/constants';
+import { AUTH_COOKIE_NAME, AUTH_COOKIE_VALUE, ROUTES_LIST } from '@/constants';
 
 export function LoginForm() {
   const router = useRouter();
@@ -41,7 +41,7 @@ export function LoginForm() {
     const safeRedirect =
       redirectPath?.startsWith('/') && !redirectPath.startsWith('//')
         ? redirectPath
-        : '/dashboard';
+        : ROUTES_LIST.dashboard;
 
     router.push(safeRedirect);
   }
